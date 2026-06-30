@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jc3248-oracle · Flash</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@9.4.3/dist/web/install-button.js?module"></script>
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center;
+      background: #0c0a07; color: #f0ead8;
+      font: 16px/1.6 -apple-system, system-ui, sans-serif; }
+    main { max-width: 480px; padding: 2rem; text-align: center; }
+    h1 { color: #f59e0b; font-size: 1.8rem; }
+    p { color: #b3a892; }
+    esp-web-install-button { --esp-tools-button-color: #f59e0b; --esp-tools-button-text-color: #0c0a07; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>jc3248-oracle 🖥️</h1>
+    <p>Flash the latest firmware to your JC3248W535 board — compiled by CI, no toolchain needed.</p>
+    <esp-web-install-button manifest="firmware/manifest.json">
+      <button slot="activate">🔥 Flash</button>
+    </esp-web-install-button>
+    <p style="font-size:13px; margin-top:2rem;">Plug in USB-C → click Flash → pick the <code>usbmodem</code> port. Chrome/Edge only (Web Serial).</p>
+  </main>
+</body>
+</html>

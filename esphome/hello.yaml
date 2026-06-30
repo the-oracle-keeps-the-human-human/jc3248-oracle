@@ -1,0 +1,79 @@
+substitutions:
+  name: jc3248-hello
+  friendly_name: JC3248 Hello
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+
+esp32:
+  board: esp32-s3-devkitc-1
+  variant: esp32s3
+  flash_size: 16MB
+  framework:
+    type: esp-idf
+
+psram:
+  mode: octal
+  speed: 80MHz
+
+logger:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ap:
+    ssid: "${name}-setup"
+
+captive_portal:
+
+web_server:
+  port: 80
+  version: 3
+
+spi:
+  - id: lcd_spi
+    type: quad
+    clk_pin: 47
+    data_pins: [21, 48, 40, 39]
+
+output:
+  - platform: ledc
+    pin: 1
+    id: backlight_pwm
+    frequency: 5000Hz
+
+light:
+  - platform: monochromatic
+    id: backlight
+    name: Backlight
+    output: backlight_pwm
+    restore_mode: ALWAYS_ON
+
+display:
+  - platform: mipi_spi
+    model: AXS15231
+    id: lcd
+    spi_id: lcd_spi
+    cs_pin: 45
+    dimensions: { width: 320, height: 480 }
+    color_order: rgb
+    invert_colors: false
+    data_rate: 40MHz
+    update_interval: 30s
+    auto_clear_enabled: true
+    lambda: |-
+      it.filled_rectangle(0, 0, 320, 480, Color(0x0C, 0x0A, 0x07));
+      it.printf(160, 200, id(font_title), Color(0xF5, 0x9E, 0x0B), TextAlign::CENTER,
+                "jc3248-oracle");
+      it.printf(160, 260, id(font_body), Color(0xE8, 0xDC, 0xC0), TextAlign::CENTER,
+                "one board, many faces");
+
+font:
+  - file: "gfonts://Roboto"
+    id: font_title
+    size: 32
+  - file: "gfonts://Roboto"
+    id: font_body
+    size: 20
