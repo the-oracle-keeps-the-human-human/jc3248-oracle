@@ -1,0 +1,4 @@
+dependencies:
+  idf: ">=5.4"
+  espressif/esp_peer: "^1.5.0"
+  espressif/esp_lcd_axs15231b: "==2.1.0"
